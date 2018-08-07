@@ -13,9 +13,12 @@ class Endorsed extends Component {
 render() {
   for (var i=0; i < this.props.apiData.contests.length; i++) {
     if(this.props.apiData.contests[i].district.scope === "stateUpper") {
-      var stateSenateDistrict = this.props.apiData.contests[i].office;
-      var senateDistrictNumber= stateSenateDistrict.substr(stateSenateDistrict.length-3);
+      var stateSenateDistrict = this.props.apiData.contests[4].office;
+      var senateDistrictNumber = stateSenateDistrict.substr(stateSenateDistrict.length-3);
       var newStateSenateDistrict = this.props.senateEndorsementList[senateDistrictNumber-1];
+      var newStateAssemblyDistrict = this.props.assemblyEndorsementList[senateDistrictNumber-1];
+
+
       return(
         <div>
           <h3 className="polling-h3">NYSNA has endorsed the following candidates in your elections:</h3>
@@ -33,14 +36,6 @@ render() {
       return(
         <div>
         {newStateAssemblyDistrict}
-        </div>
-      )
-    } else {
-      return(
-        <div>
-          <p>We could not find polling place for: 30 Newport Parkway Jersey City, NJ 07310.</p>
-           <a href="https://voterlookup.elections.ny.gov/">Please click here to look up your polling location.</a>
-
         </div>
       )
     }
