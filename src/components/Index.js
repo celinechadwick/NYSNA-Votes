@@ -30,7 +30,7 @@ axios
     apiData:response.data,
     submitted:true
   })
-  console.log(this.state.apiData.contests[5].office);
+  console.log(this.state.apiData);
 
 })
 .catch((err) => {
@@ -63,24 +63,28 @@ render() {
           <h2>Finding Your Polling Place</h2>
           <h3>FIND YOUR POLLING LOCATION AND NYSNA ENDORSED CANDIDATE:</h3>
           <form onSubmit={this.performSearch.bind(this)}>
-          <label>
-            Street Address:
+            <label>Street Address:</label>
           <br/>
           <input type="text" id="address" onChange={this.updateAddress.bind(this)} required />
           <br/>
-            Zip Code:
+
+          <label>City:</label>
           <br/>
-          <input type="number"  id="zip"  onChange={this.updateZip.bind(this)} required/>
+          <input type="text" id="address" required />
           <br/>
-          City:
+
+            <label>State:</label>
           <br/>
           <input type="text"  required />
           <br/>
+          <label>Zip Code:</label>
+        <br/>
+        <input type="text"  id="zip"  onChange={this.updateZip.bind(this)} required/>
+        <br/>
           <br/>
           <button type="button" className="submit-button" value="Submit" onClick={this.performSearch.bind(this)} >
           SUBMIT
           </button>
-          </label>
         </form>
       </div>
 

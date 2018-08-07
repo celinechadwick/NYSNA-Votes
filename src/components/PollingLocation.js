@@ -23,11 +23,14 @@ render() {
   return(
     <div>
       <h2> Your Polling Location is:</h2>
-      <h3>{this.props.apiData.pollingLocations[0].address.locationName}</h3>
-      <h3>{this.props.apiData.pollingLocations[0].address.line1}</h3>
-      <h3>{this.props.apiData.pollingLocations[0].address.city}</h3>
-      <h3>{this.props.apiData.pollingLocations[0].address.state}</h3>
-      <h3>{this.props.apiData.pollingLocations[0].address.zip}</h3>
+      <h4 className="polling-location">
+      {this.props.apiData.pollingLocations[0].address.locationName},
+      {` ` + this.props.apiData.pollingLocations[0].address.line1 + ` `}
+      {this.props.apiData.pollingLocations[0].address.city + ` `}
+      {this.props.apiData.pollingLocations[0].address.state + `, `}
+      {this.props.apiData.pollingLocations[0].address.zip}
+      </h4>
+
     </div>
   )
 }

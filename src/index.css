@@ -64,3 +64,12 @@ hr.style1{
 .submit-button:hover {
   background-color: lightGrey;
 }
+.polling-location {
+  border:1px solid black;
+  padding:5px;
+  width:50%;
+  text-align:center;
+}
+.polling-h3 {
+  text-decoration: underline;
+}
