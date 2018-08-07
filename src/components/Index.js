@@ -12,6 +12,7 @@ class Index extends Component {
     this.state = {
       apiData:[],
       submitted: false,
+      getError:false,
       streetName:"",
       zipCode:"",
       senateEndorsementList:['There are no NYNSA endorsed candidates in this district.','There are no NYNSA endorsed candidates in this district.','There are no NYNSA endorsed candidates in this district.','There are no NYNSA endorsed candidates in this district.','James Gaughran (DEM/WF/WEP) ','There are no NYNSA endorsed candidates in this district.','There are no NYNSA endorsed candidates in this district.','John Brooks (Dem/WFP) ','Todd Kaminsky (Dem/WFP) ','James Sanders (Dem/WFP ) ','Tony Avella (Dem/Ind/Ref) ','Michael Ganaris (Dem) ','Jose Peralta (Dem) ','Leroy Comrie (Dem/WFP) ','Joseph Addabbo (Dem) ','Toby Ann Stavisky (Dem ) ','There are no NYNSA endorsed candidates in this district.','There are no NYNSA endorsed candidates in this district.','Roxanne J. Persaud (Dem) ','Jessie Hamilton (Dem) ','There are no NYNSA endorsed candidates in this district.','There are no NYNSA endorsed candidates in this district.','Diane Savino (Dem/Ind) ','Andrew Lanza (Rep/Conserv/Ind) ','Velmanette Montgomery (Dem/WFP) ','Brian Kavanaugh (Dem/WFP) ','Brad Hoylman (Dem/WFP) ','Liz Kruger (Dem/WEP ) ','Jose Serrano (Dem/WFP) ','Brian Benjamin (Dem) ','Alcantera Marisol (Dem) ','Luis Sepulveda (Dem/WEP) ','Gustavo Rivera (Dem/WFP) ','There are no NYNSA endorsed candidates in this district.','Andrea Stewart-Cousins (Dem/WFP/Ind/WEP) ','Jamaal T. Bailey (Dem) ','Mayer Shelly (Dem/WFP/WEP) ','David Carlucci (Dem/Ind/WEP) ','James Skoudis (Dem/WFP/WEP/REF/IND) ','Terrance Murphy (Rep/Conserv/Ind) ','Susan Serino (Rep/Conserv/Ind) ','There are no NYNSA endorsed candidates in this district.','There are no NYNSA endorsed candidates in this district.','Neil Breslin (Dem/WFP/Ind) ','There are no NYNSA endorsed candidates in this district.','There are no NYNSA endorsed candidates in this district.','There are no NYNSA endorsed candidates in this district.','There are no NYNSA endorsed candidates in this district.','There are no NYNSA endorsed candidates in this district.','There are no NYNSA endorsed candidates in this district.','Joyce St. George (Dem/WF/WEP) ','There are no NYNSA endorsed candidates in this district.','There are no NYNSA endorsed candidates in this district.','There are no NYNSA endorsed candidates in this district.','There are no NYNSA endorsed candidates in this district.','There are no NYNSA endorsed candidates in this district.','There are no NYNSA endorsed candidates in this district.','There are no NYNSA endorsed candidates in this district.','There are no NYNSA endorsed candidates in this district.','There are no NYNSA endorsed candidates in this district.','Joan Seamans (Dem/WFP/WE) ','There are no NYNSA endorsed candidates in this district.','Timothy Kennedy (Dem/WFP/Ind )'],
@@ -35,6 +36,9 @@ axios
 })
 .catch((err) => {
   console.log(err, "get not working", "apiData:", this.state.apiData);
+  this.setState({
+    getError: true
+  })
 })
 }
 
@@ -89,14 +93,30 @@ render() {
       </div>
 
 
-    )} else {
+    )} else if(this.state.apiData.state[0].name!="New York" || this.state.getError===true){
+        return(
+          <div>
+          <h3>
+            Could not find polling place for:
+          </h3>
+          <h3>
+           {this.state.streetName + ` ` + this.state.zipCode}.
+          </h3>
+          <h3>
+            <a href="https://voterlookup.elections.ny.gov/">
+            Please click here to look up your polling location.
+            </a>
+          </h3>
+          </div>
+        )
+    } else {
       return(
         <div>
           <PollingLocation apiData={this.state.apiData}/>
           <Endorsed apiData={this.state.apiData} senateEndorsementList={this.state.senateEndorsementList} assemblyEndorsementList={this.state.assemblyEndorsementList} />
         </div>
-      )
+      )}
     }
-  }
+
 }
 export default Index
