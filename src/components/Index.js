@@ -14,6 +14,8 @@ class Index extends Component {
       submitted: false,
       getError:false,
       streetName:"",
+      city:"",
+      stateName:"NY",
       zipCode:"",
       senateEndorsementList:['There are no NYNSA endorsed candidates in this district.','There are no NYNSA endorsed candidates in this district.','There are no NYNSA endorsed candidates in this district.','There are no NYNSA endorsed candidates in this district.','James Gaughran (DEM/WF/WEP) ','There are no NYNSA endorsed candidates in this district.','There are no NYNSA endorsed candidates in this district.','John Brooks (Dem/WFP) ','Todd Kaminsky (Dem/WFP) ','James Sanders (Dem/WFP ) ','Tony Avella (Dem/Ind/Ref) ','Michael Ganaris (Dem) ','Jose Peralta (Dem) ','Leroy Comrie (Dem/WFP) ','Joseph Addabbo (Dem) ','Toby Ann Stavisky (Dem ) ','There are no NYNSA endorsed candidates in this district.','There are no NYNSA endorsed candidates in this district.','Roxanne J. Persaud (Dem) ','Jessie Hamilton (Dem) ','There are no NYNSA endorsed candidates in this district.','There are no NYNSA endorsed candidates in this district.','Diane Savino (Dem/Ind) ','Andrew Lanza (Rep/Conserv/Ind) ','Velmanette Montgomery (Dem/WFP) ','Brian Kavanaugh (Dem/WFP) ','Brad Hoylman (Dem/WFP) ','Liz Kruger (Dem/WEP ) ','Jose Serrano (Dem/WFP) ','Brian Benjamin (Dem) ','Alcantera Marisol (Dem) ','Luis Sepulveda (Dem/WEP) ','Gustavo Rivera (Dem/WFP) ','There are no NYNSA endorsed candidates in this district.','Andrea Stewart-Cousins (Dem/WFP/Ind/WEP) ','Jamaal T. Bailey (Dem) ','Mayer Shelly (Dem/WFP/WEP) ','David Carlucci (Dem/Ind/WEP) ','James Skoudis (Dem/WFP/WEP/REF/IND) ','Terrance Murphy (Rep/Conserv/Ind) ','Susan Serino (Rep/Conserv/Ind) ','There are no NYNSA endorsed candidates in this district.','There are no NYNSA endorsed candidates in this district.','Neil Breslin (Dem/WFP/Ind) ','There are no NYNSA endorsed candidates in this district.','There are no NYNSA endorsed candidates in this district.','There are no NYNSA endorsed candidates in this district.','There are no NYNSA endorsed candidates in this district.','There are no NYNSA endorsed candidates in this district.','There are no NYNSA endorsed candidates in this district.','Joyce St. George (Dem/WF/WEP) ','There are no NYNSA endorsed candidates in this district.','There are no NYNSA endorsed candidates in this district.','There are no NYNSA endorsed candidates in this district.','There are no NYNSA endorsed candidates in this district.','There are no NYNSA endorsed candidates in this district.','There are no NYNSA endorsed candidates in this district.','There are no NYNSA endorsed candidates in this district.','There are no NYNSA endorsed candidates in this district.','There are no NYNSA endorsed candidates in this district.','Joan Seamans (Dem/WFP/WE) ','There are no NYNSA endorsed candidates in this district.','Timothy Kennedy (Dem/WFP/Ind )'],
 
@@ -23,9 +25,9 @@ class Index extends Component {
   };
 
 performSearch(e) {
-console.log(this.state.streetName, "streetName", this.state.zipCode, "zip code");
+console.log(`https://www.googleapis.com/civicinfo/v2/voterinfo?address=` + this.state.streetName + this.state.city + `&electionId=2000&key=AIzaSyAPlYxnLNxkLrI1D4VUS1nyPRyEtW5VFGY`);
 axios
-.get(`https://www.googleapis.com/civicinfo/v2/voterinfo?address=` + this.state.streetName + this.state.zipCode + `&electionId=2000&key=AIzaSyAPlYxnLNxkLrI1D4VUS1nyPRyEtW5VFGY`)
+.get(`https://www.googleapis.com/civicinfo/v2/voterinfo?address=` + this.state.streetName + `%20` + this.state.city + `%20` + this.state.stateName + `%20` + this.state.zipCode + `&electionId=2000&key=AIzaSyAPlYxnLNxkLrI1D4VUS1nyPRyEtW5VFGY`)
 .then((response) => {
   this.setState({
     apiData:response.data,
@@ -46,6 +48,18 @@ axios
 // console.log(this.state.apiData.line1, "line1");
 // console.log(this.state.apiData.city, "city");
 // console.log(this.state.apiData.state, "state");
+updateCity(e) {
+  this.setState({
+    city: e.target.value
+  });
+
+}
+updateStateName(e) {
+  this.setState({
+    stateName: e.target.value
+  });
+
+}
 updateAddress(e) {
   this.setState({
     streetName: e.target.value
@@ -74,13 +88,14 @@ render() {
 
           <label>City:</label>
           <br/>
-          <input type="text" id="address" required />
+          <input type="text" id="address" onChange={this.updateCity.bind(this)} required />
           <br/>
 
             <label>State:</label>
           <br/>
-          <input type="text"  required />
+          <input type="text" value={this.state.stateName} onChange={this.updateStateName.bind(this)} required />
           <br/>
+
           <label>Zip Code:</label>
         <br/>
         <input type="text"  id="zip"  onChange={this.updateZip.bind(this)} required/>

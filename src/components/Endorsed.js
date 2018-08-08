@@ -13,7 +13,7 @@ class Endorsed extends Component {
 render() {
   for (var i=0; i < this.props.apiData.contests.length; i++) {
     if(this.props.apiData.contests[i].district.scope === "stateUpper") {
-      var stateSenateDistrict = this.props.apiData.contests[4].office;
+      var stateSenateDistrict = this.props.apiData.contests[i].office;
       var senateDistrictNumber = stateSenateDistrict.substr(stateSenateDistrict.length-3);
       var newStateSenateDistrict = this.props.senateEndorsementList[senateDistrictNumber-1];
       var newStateAssemblyDistrict = this.props.assemblyEndorsementList[71];
