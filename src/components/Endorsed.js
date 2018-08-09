@@ -30,8 +30,8 @@ render() {
       <h3 className="polling-h3">NYSNA has endorsed the following candidates in your elections:</h3>
       <ul>
         <li> Governor: Andrew Cuomo (Dem)</li>
-        <li>{stateSenateDistrict}:{` ` + newStateSenateDistrict}</li>
-        <li>{stateAssemblyDistrict}:{` ` + newStateAssemblyDistrict}</li>
+        <li>{stateSenateDistrict ? stateSenateDistrict + `: ` + newStateSenateDistrict  : <a href="https://nysna-votes.squarespace.com/s/Endorsed-Senate-Candidates.pdf">See full list of NYSNA-Endorsed State Senate Candidates</a>}</li>
+        <li>{stateAssemblyDistrict ? stateAssemblyDistrict + `: ` + newStateAssemblyDistrict : <a href="https://nysna-votes.squarespace.com/s/Endorsed-Senate-Candidates.pdf">See full list of NYSNA-Endorsed State Assembly Candidates</a>}</li>
       </ul>
     </div>
   )
