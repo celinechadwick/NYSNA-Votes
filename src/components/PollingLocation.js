@@ -16,9 +16,10 @@ render() {
   return(
     <div>
       <h1>
-      Could not find polling place for:
+      Could Not Find Polling Place For:
       </h1>
-      <h4 className="polling-location">{this.props.apiData.normalizedInput.line1 + ` ` + this.props.apiData.normalizedInput.city + `, ` + this.props.apiData.normalizedInput.state + ` ` + this.props.apiData.normalizedInput.zipcode}</h4>
+      <h4 className="polling-location">{this.props.apiData.normalizedInput.line1 + ` ` + this.props.apiData.normalizedInput.city + `, ` + this.props.apiData.normalizedInput.state}</h4>
+        <p> Please make sure you are entering a valid New York State Address</p>
     </div>
 )} else {
   return(
