@@ -16,15 +16,17 @@ render() {
   return(
     <div>
       <h1>
-      Error while trying to fetch polling place
+      Could not find polling place for:
       </h1>
+      <h4 className="polling-location">{this.props.apiData.normalizedInput.line1 + ` ` + this.props.apiData.normalizedInput.city + `, ` + this.props.apiData.normalizedInput.state + ` ` + this.props.apiData.normalizedInput.zipcode}</h4>
     </div>
 )} else {
   return(
     <div>
       <h2> Your Polling Location is:</h2>
       <h4 className="polling-location">
-      {this.props.apiData.pollingLocations[0].address.locationName},
+      <strong>{this.props.apiData.pollingLocations[0].address.locationName}</strong>
+      <br />
       {` ` + this.props.apiData.pollingLocations[0].address.line1 + ` `}
       {this.props.apiData.pollingLocations[0].address.city + ` `}
       {this.props.apiData.pollingLocations[0].address.state + `, `}

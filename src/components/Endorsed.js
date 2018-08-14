@@ -15,13 +15,16 @@ render() {
     if(this.props.apiData.contests[i].district.scope === "stateUpper") {
       var stateSenateDistrict = this.props.apiData.contests[i].office;
       var senateDistrictNumber = stateSenateDistrict.substr(stateSenateDistrict.length-3);
-      var newStateSenateDistrict = this.props.senateEndorsementList[senateDistrictNumber-1];
-      var newStateAssemblyDistrict = this.props.assemblyEndorsementList[71];
+      var newStateSenateDistrict = this.props.senateEndorsementList[senateDistrictNumber-1][0];
+      var newStateAssemblyDistrict = this.props.assemblyEndorsementList[i];
+      var stateSenateBlurb = this.props.senateEndorsementList[senateDistrictNumber-1][1];
 
     } else if (this.props.apiData.contests[i].district.scope === "stateLower"){
       var stateAssemblyDistrict = this.props.apiData.contests[i].office;
-      var assemblyDistrictNumber= stateAssemblyDistrict.substr(stateAssemblyDistrict.length-3);
-      var newStateAssemblyDistrict=  this.props.assemblyEndorsementList[assemblyDistrictNumber-1];
+      var assemblyDistrictNumber = stateAssemblyDistrict.substr(stateAssemblyDistrict.length-3);
+      var newStateAssemblyDistrict =  this.props.assemblyEndorsementList[assemblyDistrictNumber-1][0];
+      var stateAssemblyBlurb = this.props.assemblyEndorsementList[assemblyDistrictNumber-1][1];
+
 
     }
   }
@@ -31,7 +34,10 @@ render() {
       <ul>
         <li> Governor: Andrew Cuomo (Dem)</li>
         <li>{stateSenateDistrict ? stateSenateDistrict + `: ` + newStateSenateDistrict  : <a href="https://nysna-votes.squarespace.com/s/Endorsed-Senate-Candidates.pdf">See full list of NYSNA-Endorsed State Senate Candidates</a>}</li>
+          <p className="blurb">{stateSenateBlurb ? stateSenateBlurb : ``}</p>
         <li>{stateAssemblyDistrict ? stateAssemblyDistrict + `: ` + newStateAssemblyDistrict : <a href="https://nysna-votes.squarespace.com/s/Endorsed-Senate-Candidates.pdf">See full list of NYSNA-Endorsed State Assembly Candidates</a>}</li>
+          <p className="blurb">{stateAssemblyBlurb ? stateAssemblyBlurb : ``}</p>
+
       </ul>
     </div>
   )
