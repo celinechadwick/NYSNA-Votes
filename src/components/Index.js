@@ -46,7 +46,7 @@ axios
 }
 
 onPlaceSelected(place) {
-  place.geometry?
+  place.geometry ?
   this.setState({
     lat: place.geometry.location.lat(),
     lng: place.geometry.location.lng(),
